@@ -7,6 +7,7 @@
   - git push <this will send the changes to GitHub>
   - git pull <this will update VSCode to match what it looks like on GitHub>
   - cry <this is not a command for the computer but it will be necessary in the future>
+
 [My startup - Simon](https://simon.cs260.click)
 
 ## Helpful links
