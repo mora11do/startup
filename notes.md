@@ -3,7 +3,7 @@
 ## GitHub Notes
 - Commands
   - git add . #this will add changes to the queue, waiting to be pushed (BUT ONLY AFTER YOU ctrl+s in VSCode)
-  - git commit -m ["insert message"] #this will...also add changes to the queue, I guess#
+  - git commit -m ["insert message"] #this will...also add changes to the queue, I guess
   - git push #this will send the changes to GitHub
   - git pull #this will update VSCode to match what it looks like on GitHub
   - cry #this is not a command for the computer but it will be necessary in the future
