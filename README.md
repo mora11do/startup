@@ -41,9 +41,9 @@ This is what the application will look like.
 
 - Upload audio files
 - Modify audio files
-> _trim_
-> _change speed_
-> _layer_
+> _trim,_
+> _change speed,_
+> _layer,_
 > _denoise, etc_
 - Store new audio files
 

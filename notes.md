@@ -1,30 +1,30 @@
 # CS 260 Notes
 
 ## Markdown
-`#`
+- `#`
 # first-level heading
-`##`
+- `##`
 ## second-level heading
-`(up to 6 #)`
-`** bold` **bold**
-`_ italics` _italcs_
-`~~ strikethrough` ~~strikethrough~~
-`<sub> </sub>` <sub>subscript</sub>  
-`<sup> </sup>` <sup>superscript</sup>  
-`<ins> </ins>` <ins>underline</ins>
-`> quote` > quoted text
-backticks for quoting code like `this`
-triple backticks for quoting code like this:
+- `(up to 6 #)`
+- `** bold` **bold**
+- `_ italics` _italcs_
+- `~~ strikethrough` ~~strikethrough~~
+- `<sub> </sub>` <sub>subscript</sub>  
+- `<sup> </sup>` <sup>superscript</sup>  
+- `<ins> </ins>` <ins>underline</ins>
+- `> quote` > quoted text
+- backticks for quoting code like `this`
+- triple backticks for quoting code like this:
 ```
 This is in its own block
 ```
 
 ## Keypair
 **USE __GIT BASH__, NOT POWERSHELL**
-Stored in `~/.ssh
+- Stored in `~/.ssh
 > This is in a hidden directory
-**thekeypair.pem**
-You will need this to...access...something, I think
+- **thekeypair.pem**
+> You will need this to...access...something, I think
 
 
 ## GitHub Notes
