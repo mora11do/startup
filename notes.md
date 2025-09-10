@@ -1,11 +1,8 @@
 # CS 260 Notes
 
 ## Markdown
-- `#`
-# first-level heading
-- `##`
-## second-level heading
-- `(up to 6 #)`
+# first-level heading `#`
+## second-level heading `## (up to 6 #)`
 - `** bold` **bold**
 - `_ italics` _italcs_
 - `~~ strikethrough` ~~strikethrough~~
