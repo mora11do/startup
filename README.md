@@ -43,7 +43,7 @@ This is what the application will look like.
 - Modify audio files
 > _trim_
 > _change speed_
-> _laye0r_
+> _layer_
 > _denoise, etc_
 - Store new audio files
 
@@ -51,12 +51,12 @@ This is what the application will look like.
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - At least two HTML pages, one for login and the other for the audio editor itself
-- **CSS** - Make it look pretty and easy to look at/navigate
-- **React** - Button to play/stop the audio, duplicate audio, sliders to trim, speed it up/slow it down, add more audio files, etc
-- **Service** - Stuff for login, modifying the audio soundwave itself, saving the modified audio into a new file, AI noise cleaning and other effects
+- **HTML** - At least two HTML pages, one for login and the other for the audio editor itself.
+- **CSS** - Make it look pretty and easy to look at/navigate.
+- **React** - Button to play/stop the audio, duplicate audio, sliders to trim, speed it up/slow it down, add more audio files, etc.
+- **Service** - Stuff for login, modifying the audio soundwave itself, saving the modified audio into a new file, AI noise cleaning and other effects.
 - **DB/Login** - Stores users and the new audio files they have created. Credentials securely stored. Can't find previously created audio files unless logged in.
-- **WebSocket** - Add short audio clips from online, share audio with other users
+- **WebSocket** - Add short audio clips from online, share audio with other users.
 
 ## 🚀 AWS deliverable
 
