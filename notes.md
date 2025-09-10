@@ -1,5 +1,32 @@
 # CS 260 Notes
 
+## Markdown
+`#`
+# first-level heading
+`##`
+## second-level heading
+`(up to 6 #)`
+`** bold` **bold**
+`_ italics` _italcs_
+`~~ strikethrough` ~~strikethrough~~
+`<sub> </sub>` <sub>subscript</sub>  
+`<sup> </sup>` <sup>superscript</sup>  
+`<ins> </ins>` <ins>underline</ins>
+`> quote` > quoted text
+backticks for quoting code like `this`
+triple backticks for quoting code like this:
+```
+This is in its own block
+```
+
+## Keypair
+**USE __GIT BASH__, NOT POWERSHELL**
+Stored in `~/.ssh
+> This is in a hidden directory
+**thekeypair.pem**
+You will need this to...access...something, I think
+
+
 ## GitHub Notes
 - Commands
   - git add . <this will add changes to the queue, waiting to be pushed (BUT ONLY AFTER YOU ctrl+s in VSCode)>
@@ -8,6 +35,12 @@
   - git pull <this will update VSCode to match what it looks like on GitHub>
   - cry <this is not a command for the computer but it will be necessary in the future>
 [My startup - Simon](https://simon.cs260.click)
+
+
+
+
+
+# Fake Notes
 
 ## Helpful links
 
