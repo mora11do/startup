@@ -1,5 +1,10 @@
 # CS 260 Notes
 
+## HTML
+- Hyperlink: `<a href="https://www.example.com">How It Appears To Users</a>`
+- Image : `<img src="https://example.com/horse.jpg" alt="Horse" width="500">`
+- There are also body, p (paragraph), header, h1, nav, div, main, and other tags which I am still experimenting around with.
+
 ## Markdown
 # first-level heading `#`
 ## second-level heading `## (up to 6 #)`
