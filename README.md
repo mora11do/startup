@@ -68,15 +68,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I have three separate pages. I have index.html, login.html, and savedmusic.html
+- [x] **Proper HTML element usage** - I'll be honest I mostly just copied the fomatting from simon but I do have BODY, NAV, MAIN, HEADER, and FOOTER
+- [x] **Links** - There are links to each of the html pages.
+- [x] **Text** - There is basic text explaining what certain things will do when working.
+- [x] **3rd party API placeholder** - AI denoiser made by someone else and ability to search for and watch Youtube videos.
+- [x] **Images** - Added a sample image of what the editor might look like (as well as two other images).
+- [x] **Login placeholder** - Basic welcome message and an html page dedicated to the login.
+- [x] **DB data placeholder** - Previously saved audio files created by users are saved in the database. Audio files made by others are also saved.
+- [x] **WebSocket placeholder** - Live sharing of music, as well as a basic chat system between users.
 
 ## 🚀 CSS deliverable
 
