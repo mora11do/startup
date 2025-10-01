@@ -82,12 +82,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - Looking pretty spicy. Added color and stuff.
+- [x] **Navigation elements** - Made the buttons change color when you hover over them and they are side by side and look nicer.
+- [x] **Responsive to window resizing** - Footer stays on the bottom, Text moves around and attempts to fit on screen.
+- [x] **Application elements** - Made various things look nicer, like the log in part.
+- [x] **Application text content** - Changed the font. Also centered text.
+- [x] **Application images** - Made corners rounded and also added a small border.
 
 ## 🚀 React part 1: Routing deliverable
 

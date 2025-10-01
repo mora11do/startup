@@ -1,5 +1,11 @@
 # CS 260 Notes
 
+## Deploying files to website
+`./deployFiles.sh -k ~/.ssh/thekeypair.pem -h mora11do.click -s startup`
+
+## CSS
+Man who knows lol, just find other code that works and then use it and modify small things to make it work how you want.
+
 ## HTML
 - Hyperlink: `<a href="https://www.example.com">How It Appears To Users</a>`
 - Image : `<img src="https://example.com/horse.jpg" alt="Horse" width="500">`
