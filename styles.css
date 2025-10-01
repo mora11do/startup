@@ -7,11 +7,11 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  height: 50%;
+  min-height: 100vh;
 }
 
 header {
-  flex: 0 50px;
+  height: 50px;
   font-size: 15px;
   background: #570274;
   color: rgb(207, 207, 207);
@@ -61,6 +61,25 @@ main {
   margin: 40px auto;             /* center horizontally with some top gap */
   box-shadow: 0 4px 10px rgba(0,0,0,0.25); /* subtle shadow */
   text-align: center;
+}
+
+.login-box input, .login-box button {
+  margin: 8px 0;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+}
+
+.login-box button {
+  background: #8246a8;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background: #a566d0;
 }
 
 img {
