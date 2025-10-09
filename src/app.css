@@ -10,6 +10,12 @@ body {
   min-height: 100vh;
 }
 
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+}
+
 header {
   height: 50px;
   font-size: 15px;
