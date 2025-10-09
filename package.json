@@ -1,4 +1,27 @@
 {
+  "name": "startup",
+  "version": "1.0.0",
+  "description": "I think I was told to modify this so here it is.\r And this is an edit made from the website itself.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mora11do/startup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mora11do/startup/issues"
+  },
+  "homepage": "https://github.com/mora11do/startup#readme",
+  "devDependencies": {
+    "vite": "^7.1.9"
+  },
   "dependencies": {
     "bootstrap": "^5.3.8",
     "react": "^19.2.0",
