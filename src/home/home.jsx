@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Home() {
+  const [selectedFile, setSelectedFile] = useState(null);
+
   return (
     <div>
       <h1>This is the home :)</h1>
+      
+      <div style={{ border: '1px solid blue', padding: '10px', margin: '10px' }}>
+        <h3>Upload Audio File</h3>
+        <input 
+          type="file" 
+          accept="audio/*" 
+          onChange={(e) => setSelectedFile(e.target.files[0])}
+        />
+        {selectedFile && <p>Selected: {selectedFile.name}</p>}
+      </div>
+
+      {/* All your existing stuff stays the same */}
       <img
         src="https://images.ctfassets.net/lzny33ho1g45/5G8NtHY6do1a5iudg099Pf/be2c39648884ab91e10fb7b4360a9c8c/image6.jpeg"
         alt="Audio Editor"
