@@ -4,8 +4,14 @@ function Home() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [audioSpeed, setAudioSpeed] = useState(1);
   const [isDenoising, setIsDenoising] = useState(false);
-  const handleSave = () => {
-    alert(`Saving audio...`);
+  const [isSaving, setIsSaving] = useState(false);
+  const handleSaving = () => {
+    setIsSaving(true);
+    // Simulate sound saving processing time
+    setTimeout(() => {
+      setIsSaving(false);
+      alert('Audio saved successfully!');
+    }, 1000);
   };
   const handleAIDenoiser = () => {
     setIsDenoising(true);
@@ -43,9 +49,19 @@ function Home() {
             onChange={(e) => setAudioSpeed(parseFloat(e.target.value))}
           />
           <div style={{ marginTop: '10px' }}>
-            <button onClick={handleSave} style={{ padding: '10px 20px', backgroundColor: '#570274', color: 'white', border: 'none', borderRadius: '5px' }}>
-              Save Audio
-            </button>
+            <button 
+            onClick={handleSaving} 
+            disabled={isSaving}
+            style={{ 
+              padding: '10px 20px', 
+              backgroundColor: isSaving ? '#ccc' : '#570274', 
+              color: 'white', 
+              border: 'none', 
+              borderRadius: '5px' 
+            }}
+          >
+            {isSaving ? 'Saving...' : 'Save Audio'}
+          </button>
           </div>
         </div>
       )}
