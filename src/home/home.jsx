@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function Home() {
+function Home({ currentUser }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [audioSpeed, setAudioSpeed] = useState(1);
   const [isDenoising, setIsDenoising] = useState(false);
@@ -12,6 +12,11 @@ function Home() {
   const [messages, setMessages] = useState([]);
   
   const handleSaving = () => {
+      if (!currentUser) {
+        alert('Please log in to save music!');
+        return;
+      }
+
     setIsSaving(true);
     setTimeout(() => {
       setIsSaving(false);
@@ -19,11 +24,22 @@ function Home() {
       id: Date.now(),
       name: songName ? `${songName}.mp3`: `${selectedFile.name}_edited`,
       speed: audioSpeed,
-      dateCreated: new Date().toLocaleDateString()
+      dateCreated: new Date().toLocaleDateString(),
+      owner: currentUser
     };
-    setSavedMusic([...savedMusic, newSong]);
-    localStorage.setItem('savedMusic', JSON.stringify([...savedMusic, newSong]));
-      alert('Audio saved successfully!');
+
+    const allMusic = JSON.parse(localStorage.getItem('allUserMusic') || '{}');
+
+    if (!allMusic[currentUser]) {
+      allMusic[currentUser] = [];
+    }
+    allMusic[currentUser].push(newSong);
+
+    localStorage.setItem('allUserMusic', JSON.stringify(allMusic));
+
+    localStorage.setItem('savedMusic', JSON.stringify(allMusic[currentUser]));
+    setSavedMusic(allMusic[currentUser]);
+    alert('Audio saved successfully!');
     }, 1000);
   };
 
@@ -68,11 +84,17 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  const savedMusicData = localStorage.getItem('savedMusic');
-  if (savedMusicData) {
-    setSavedMusic(JSON.parse(savedMusicData));
+  if (currentUser) {
+    const allMusic = JSON.parse(localStorage.getItem('allUserMusic') || '{}');
+    if (allMusic[currentUser]) {
+      setSavedMusic(allMusic[currentUser]);
+    } else {
+      setSavedMusic([]);
+    }
+  } else {
+    setSavedMusic([]);
   }
-}, []);
+}, [currentUser]);
 
   return (
     <div>

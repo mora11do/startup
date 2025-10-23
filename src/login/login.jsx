@@ -18,6 +18,13 @@ function Login({ setCurrentUser }) {
     }
   };
 
+  const handleLogout = () => {
+    setCurrentUser('');
+    setUsername('');
+    setPassword('');
+    alert('Logged out successfully!');
+  };
+
   return (
     <main>
       <h1>Login</h1>
@@ -43,6 +50,21 @@ function Login({ setCurrentUser }) {
             />
           </div>
           <button type="submit">Login</button>
+
+          <button 
+            type="button" 
+            onClick={handleLogout}
+            style={{ 
+              marginTop: '10px', 
+              backgroundColor: '#dc3545',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px'
+            }}
+          >
+            Logout
+          </button>
         </form>
       </div>
     </main>
