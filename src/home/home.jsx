@@ -16,7 +16,7 @@ function Home() {
       setIsSaving(false);
       const newSong = {
       id: Date.now(),
-      name: `${songName}.mp3`,
+      name: songName ? `${songName}.mp3`: `${selectedFile.name}_edited`,
       speed: audioSpeed,
       dateCreated: new Date().toLocaleDateString()
     };
