@@ -202,15 +202,6 @@ useEffect(() => {
         width="800"
         height="500"
       />
-      <h3>Okay just imagine this wasn't an imagine up here ^^^^^ just pretend it's working</h3>
-      <h4>
-        (One of the functionalities in the editor will be a THIRD PARTY SERVICE
-        which will use someone else's program to use AI to denoise audio files)
-      </h4>
-      <h4>
-        (ALSO a Youtube search bar which can pull up videos from Youtube to help
-        with creative inspiration)
-      </h4>
       <h1>My Music (Database Placeholder)</h1>
         <div style={{ border: '1px solid teal', padding: '10px', margin: '10px' }}>
           {savedMusic.length > 0 ? (

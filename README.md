@@ -101,8 +101,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - There's a lot I want to add in terms of functionality (or mocked functionality) but I added enough to have the website working at its bare bones, more or less. (I want to add more to "Browse Music" specifically). But I do have mocks for the denoiser, music saver, uploader, speed changer, live chat, etc.
+- [x] **Hooks** - I have a lot of useStates, like one for helping with saving music, picking a song name, the mock for searching youtube, changing the audio speed, denoising the audio, etc. Also have useEffect for log in stuff to help know which saved audios to load in, also helps with the WebSocket setInterval thing to simulate live chat messages.
 
 ## 🚀 Service deliverable
 
