@@ -3,6 +3,9 @@ import React, { useState } from "react";
 function Home() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [audioSpeed, setAudioSpeed] = useState(1);
+  const handleSave = () => {
+    alert(`Saving audio...`);
+  };
 
   return (
     <div>
@@ -30,6 +33,11 @@ function Home() {
             value={audioSpeed}
             onChange={(e) => setAudioSpeed(parseFloat(e.target.value))}
           />
+          <div style={{ marginTop: '10px' }}>
+            <button onClick={handleSave} style={{ padding: '10px 20px', backgroundColor: '#570274', color: 'white', border: 'none', borderRadius: '5px' }}>
+              Save Audio
+            </button>
+          </div>
         </div>
       )}
 
