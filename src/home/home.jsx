@@ -5,6 +5,9 @@ function Home() {
   const [audioSpeed, setAudioSpeed] = useState(1);
   const [isDenoising, setIsDenoising] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [youtubeSearch, setYoutubeSearch] = useState('');
+  const [youtubeResults, setYoutubeResults] = useState([]);
+  
   const handleSaving = () => {
     setIsSaving(true);
     // Simulate sound saving processing time
@@ -13,6 +16,7 @@ function Home() {
       alert('Audio saved successfully!');
     }, 1000);
   };
+
   const handleAIDenoiser = () => {
     setIsDenoising(true);
     // Simulate AI processing time
@@ -21,6 +25,15 @@ function Home() {
       alert('AI denoising complete!');
     }, 2000);
   };
+
+  const handleYoutubeSearch = () => {
+  const mockResults = [
+    `${youtubeSearch} - Official Music Video`,
+    `${youtubeSearch} Tutorial`,
+    `How to make ${youtubeSearch} beats`
+  ];
+  setYoutubeResults(mockResults);
+};
 
   return (
     <div>
@@ -84,6 +97,33 @@ function Home() {
           </button>
         </div>
       )}
+
+
+      <div style={{ border: '1px solid purple', padding: '10px', margin: '10px' }}>
+        <h3>YouTube Inspiration Search (3rd Party API)</h3>
+        <input 
+          type="text" 
+          placeholder="Search for music inspiration..."
+          style={{ width: '250px', padding: '8px', marginRight: '10px' }}
+          onChange={(e) => setYoutubeSearch(e.target.value)}
+        />
+        <button 
+          onClick={handleYoutubeSearch}
+          style={{ padding: '8px 15px', backgroundColor: '#ff0000', color: 'white', border: 'none', borderRadius: '5px' }}
+        >
+          Search YouTube
+        </button>
+        {youtubeResults.length > 0 && (
+          <div style={{ marginTop: '10px' }}>
+            <h4>Results:</h4>
+            {youtubeResults.map((video, index) => (
+              <p key={index} style={{ margin: '5px 0', padding: '5px', backgroundColor: '#f0f0f0' }}>
+                🎵 {video}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
 
       <img
         src="https://images.ctfassets.net/lzny33ho1g45/5G8NtHY6do1a5iudg099Pf/be2c39648884ab91e10fb7b4360a9c8c/image6.jpeg"
