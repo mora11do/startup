@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Home() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -9,6 +9,7 @@ function Home() {
   const [songName, setSongName] = useState('');
   const [youtubeSearch, setYoutubeSearch] = useState('');
   const [youtubeResults, setYoutubeResults] = useState([]);
+  const [messages, setMessages] = useState([]);
   
   const handleSaving = () => {
     setIsSaving(true);
@@ -41,6 +42,29 @@ function Home() {
   ];
   setYoutubeResults(mockResults);
 };
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    const userNames = ['Bob', 'Bobby', 'Bobi', 'Sam'];
+    const messageSamples = [
+      'Check out my latest track!',
+      'Just finished mixing this song',
+      'Need feedback on this beat',
+      "Truly the most website ever invented",
+      "Wow this app is the most app I've ever seen in my life"
+    ];
+    
+    const randomUser = userNames[Math.floor(Math.random() * userNames.length)];
+    const randomMessage = messageSamples[Math.floor(Math.random() * messageSamples.length)];
+    
+    setMessages(prev => [...prev.slice(-4), {
+      from: randomUser,
+      message: randomMessage,
+    }]);
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, []);
 
   return (
     <div>
@@ -175,13 +199,21 @@ function Home() {
         width="400"
         height="200"
       />
-      <h1>(WEBSOCKET PLACEHOLDER)</h1>
-      <h3>
-        Oh boy you got a LIVE, REAL-TIME message from your buddy who sent you the
-        file they are currently working on!
-      </h3>
-      <p>"Hey bro I've been working on this love song for you, give it a listen"</p>
-      <h3>(Click here to listen to their audio clip)</h3>
+      <h1>Live Music Chat (WebSocket Placeholder)</h1>
+        <div style={{ border: '1px solid red', padding: '10px', margin: '10px' }}>
+          <h3>Live Messages from Other Users</h3>
+          <div style={{ height: '150px', overflowY: 'scroll', backgroundColor: '#f9f9f9', padding: '10px', borderRadius: '5px' }}>
+            {messages.length > 0 ? (
+              messages.map((msg, index) => (
+                <div key={index} style={{ margin: '5px 0', padding: '5px', backgroundColor: 'white', borderRadius: '3px' }}>
+                  <strong>{msg.from}</strong>: {msg.message}
+                </div>
+              ))
+            ) : (
+              <p>Waiting for live messages...</p>
+            )}
+          </div>
+        </div>
     </div>
   );
 }
