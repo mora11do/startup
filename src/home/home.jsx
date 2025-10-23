@@ -22,6 +22,7 @@ function Home() {
       dateCreated: new Date().toLocaleDateString()
     };
     setSavedMusic([...savedMusic, newSong]);
+    localStorage.setItem('savedMusic', JSON.stringify([...savedMusic, newSong]));
       alert('Audio saved successfully!');
     }, 1000);
   };
@@ -64,6 +65,13 @@ useEffect(() => {
   }, 5000);
 
   return () => clearInterval(interval);
+}, []);
+
+useEffect(() => {
+  const savedMusicData = localStorage.getItem('savedMusic');
+  if (savedMusicData) {
+    setSavedMusic(JSON.parse(savedMusicData));
+  }
 }, []);
 
   return (
