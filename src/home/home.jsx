@@ -3,8 +3,17 @@ import React, { useState } from "react";
 function Home() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [audioSpeed, setAudioSpeed] = useState(1);
+  const [isDenoising, setIsDenoising] = useState(false);
   const handleSave = () => {
     alert(`Saving audio...`);
+  };
+  const handleAIDenoiser = () => {
+    setIsDenoising(true);
+    // Simulate AI processing time
+    setTimeout(() => {
+      setIsDenoising(false);
+      alert('AI denoising complete!');
+    }, 2000);
   };
 
   return (
@@ -38,6 +47,25 @@ function Home() {
               Save Audio
             </button>
           </div>
+        </div>
+      )}
+
+      {selectedFile && (
+        <div style={{ border: '1px solid orange', padding: '10px', margin: '10px' }}>
+          <h3>AI Denoiser (3rd Party Service)</h3>
+          <button 
+            onClick={handleAIDenoiser} 
+            disabled={isDenoising}
+            style={{ 
+              padding: '10px 20px', 
+              backgroundColor: isDenoising ? '#ccc' : '#ff6600', 
+              color: 'white', 
+              border: 'none', 
+              borderRadius: '5px' 
+            }}
+          >
+            {isDenoising ? 'Processing...' : 'Apply AI Denoising'}
+          </button>
         </div>
       )}
 
