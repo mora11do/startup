@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function Home() {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [audioSpeed, setAudioSpeed] = useState(1);
 
   return (
     <div>
@@ -17,7 +18,21 @@ function Home() {
         {selectedFile && <p>Selected: {selectedFile.name}</p>}
       </div>
 
-      {/* All your existing stuff stays the same */}
+      {selectedFile && (
+        <div style={{ border: '1px solid green', padding: '10px', margin: '10px' }}>
+          <h3>Audio Speed Control</h3>
+          <label>Speed: {audioSpeed}x </label>
+          <input 
+            type="range" 
+            min="0.5" 
+            max="2" 
+            step="0.05" 
+            value={audioSpeed}
+            onChange={(e) => setAudioSpeed(parseFloat(e.target.value))}
+          />
+        </div>
+      )}
+
       <img
         src="https://images.ctfassets.net/lzny33ho1g45/5G8NtHY6do1a5iudg099Pf/be2c39648884ab91e10fb7b4360a9c8c/image6.jpeg"
         alt="Audio Editor"
