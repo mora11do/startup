@@ -5,21 +5,28 @@ function Home() {
   const [audioSpeed, setAudioSpeed] = useState(1);
   const [isDenoising, setIsDenoising] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [savedMusic, setSavedMusic] = useState([]);
+  const [songName, setSongName] = useState('');
   const [youtubeSearch, setYoutubeSearch] = useState('');
   const [youtubeResults, setYoutubeResults] = useState([]);
   
   const handleSaving = () => {
     setIsSaving(true);
-    // Simulate sound saving processing time
     setTimeout(() => {
       setIsSaving(false);
+      const newSong = {
+      id: Date.now(),
+      name: `${songName}.mp3`,
+      speed: audioSpeed,
+      dateCreated: new Date().toLocaleDateString()
+    };
+    setSavedMusic([...savedMusic, newSong]);
       alert('Audio saved successfully!');
     }, 1000);
   };
 
   const handleAIDenoiser = () => {
     setIsDenoising(true);
-    // Simulate AI processing time
     setTimeout(() => {
       setIsDenoising(false);
       alert('AI denoising complete!');
@@ -37,11 +44,9 @@ function Home() {
 
   return (
     <div>
-      <h1>This is the home :)</h1>
-      
       <div style={{ border: '1px solid blue', padding: '10px', margin: '10px' }}>
         <h3>Upload Audio File</h3>
-        <input 
+        <input
           type="file" 
           accept="audio/*" 
           onChange={(e) => setSelectedFile(e.target.files[0])}
@@ -61,6 +66,18 @@ function Home() {
             value={audioSpeed}
             onChange={(e) => setAudioSpeed(parseFloat(e.target.value))}
           />
+
+          <div style={{ marginTop: '10px' }}>
+            <label>Save as: </label>
+            <input 
+              type="text" 
+              placeholder={`${selectedFile.name}_edited`}
+              value={songName}
+              onChange={(e) => setSongName(e.target.value)}
+              style={{ width: '200px', padding: '5px', marginLeft: '10px' }}
+            />
+          </div>
+
           <div style={{ marginTop: '10px' }}>
             <button 
             onClick={handleSaving} 
@@ -140,12 +157,18 @@ function Home() {
         (ALSO a Youtube search bar which can pull up videos from Youtube to help
         with creative inspiration)
       </h4>
-      <h1>My Music</h1>
-      <h3>
-        (DATABASE DATA PLACEHOLDER: This is where your previously created music
-        files will be stored)
-      </h3>
-      <h3>MusicFile1   MusicFile2    MusicFile3</h3>
+      <h1>My Music (Database Placeholder)</h1>
+        <div style={{ border: '1px solid teal', padding: '10px', margin: '10px' }}>
+          {savedMusic.length > 0 ? (
+            savedMusic.map(song => (
+              <div key={song.id} style={{ margin: '10px 0', padding: '10px', backgroundColor: '#f9f9f9', borderRadius: '5px' }}>
+                <strong>🎵 {song.name}</strong> - Speed: {song.speed}x - Saved: {song.dateCreated}
+              </div>
+            ))
+          ) : (
+            <p>No saved music yet. Upload and save some audio files!</p>
+          )}
+        </div>
       <img
         src="https://media.idownloadblog.com/wp-content/uploads/2023/03/Messages-app-icon.jpg"
         alt="Message"
