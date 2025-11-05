@@ -10,3 +10,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(express.static('public'));
+
+let users = {};
+let userMusic = {};
+
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'api test thing' });
+});
