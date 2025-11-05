@@ -35,6 +35,16 @@ app.post('/api/register', (req, res) => {
   res.json({ message: 'User created successfully' });
 });
 
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  
+  if (users[username] && users[username].password === password) {
+    res.json({ message: 'Login successful', username: username });
+  } else {
+    res.status(401).json({ message: 'Invalid username or password' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
