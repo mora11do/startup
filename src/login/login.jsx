@@ -4,37 +4,62 @@ import { useNavigate } from "react-router-dom";
 function Login({ setCurrentUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-  e.preventDefault();
-  
-  if (!username || !password) {
-    alert('Please enter username and password');
-    return;
-  }
+    e.preventDefault();
+    
+    if (!username || !password) {
+      alert('Please enter username and password');
+      return;
+    }
 
-  const response = await fetch('/api/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
-  });
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
 
-  const data = await response.json();
-  console.log('Response data:', data);
-  
-  if (response.ok) {
-    alert('Login successful!');
-  } else {
-    alert('Login failed!');
-  }
-};
+    const data = await response.json();
+    
+    if (response.ok) {
+      setCurrentUser(username);
+      navigate('/');
+      alert(`Welcome back, ${username}!`);
+    } else {
+      alert(data.message);
+    }
+  };
 
   const handleLogout = () => {
     setCurrentUser('');
     setUsername('');
     setPassword('');
     alert('Logged out successfully!');
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    
+    if (!username || !password) {
+      alert('Please enter username and password');
+      return;
+    }
+
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json();
+    
+    if (response.ok) {
+      alert(`Account created successfully! You can now login with username: ${username}`);
+    } else {
+      alert(data.message);
+    }
   };
 
   return (
@@ -62,6 +87,21 @@ function Login({ setCurrentUser }) {
             />
           </div>
           <button type="submit">Login</button>
+
+          <button 
+            type="button" 
+            onClick={handleRegister}
+            style={{ 
+              marginTop: '10px', 
+              backgroundColor: '#28a745',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px'
+            }}
+          >
+            Register
+          </button>
 
           <button 
             type="button" 
