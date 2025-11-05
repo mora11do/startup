@@ -108,12 +108,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Index.js inside of the service folder runs on port 4000, is working.
+- [x] **Static middleware for frontend** - Used app.use(express.static('public')).
+- [x] **Calls to third party endpoints** - Button asks for inspiration from JSONPlaceholder API.
+- [x] **Backend service endpoints** - Created /api/register, /api/login, /api/music, /api/music/:username
+- [x] **Frontend calls service endpoints** - The save button uses /api/music, music loading uses /api/music/:username, and then also the login stuff.
+- [x] **Supports registration, login, logout, and restricted endpoint** - Yep can register, login, logout and music is saved only for logged in users.
 
 
 ## 🚀 DB deliverable
