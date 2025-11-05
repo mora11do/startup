@@ -54,13 +54,25 @@ function Home({ currentUser }) {
     }, 2000);
   };
 
-  const handleYoutubeSearch = () => {
-  const mockResults = [
-    `${youtubeSearch} - Official Music Video`,
-    `${youtubeSearch} Tutorial`,
-    `How to make ${youtubeSearch} beats`
-  ];
-  setYoutubeResults(mockResults);
+  const handleYoutubeSearch = async () => {
+  if (!youtubeSearch.trim()) {
+    alert('Please enter a search term');
+    return;
+  }
+
+  try {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?q=${youtubeSearch}`);
+    const data = await response.json();
+    
+    const musicResults = data.slice(0, 3).map(post => 
+      `${youtubeSearch} - ${post.title.slice(0, 30)}...`
+    );
+    
+    setYoutubeResults(musicResults);
+  } catch (error) {
+    console.error('API call failed:', error);
+    alert('Search failed, please try again');
+  }
 };
 
 useEffect(() => {
@@ -88,12 +100,9 @@ useEffect(() => {
 
 useEffect(() => {
   if (currentUser) {
-    const allMusic = JSON.parse(localStorage.getItem('allUserMusic') || '{}');
-    if (allMusic[currentUser]) {
-      setSavedMusic(allMusic[currentUser]);
-    } else {
-      setSavedMusic([]);
-    }
+    fetch(`/api/music/${currentUser}`)
+      .then(response => response.json())
+      .then(music => setSavedMusic(music));
   } else {
     setSavedMusic([]);
   }
