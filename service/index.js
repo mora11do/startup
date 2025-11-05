@@ -18,6 +18,23 @@ app.get('/api/test', (req, res) => {
   res.json({ message: 'api test thing' });
 });
 
+
+app.get('/api/users', (req, res) => {
+  res.json(users);
+});
+
+app.post('/api/register', (req, res) => {
+  const { username, password } = req.body;
+  
+  if (users[username]) {
+    res.status(400).json({ message: 'Username already exists' });
+    return;
+  }
+  
+  users[username] = { password: password };
+  res.json({ message: 'User created successfully' });
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
