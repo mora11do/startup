@@ -34,7 +34,6 @@ function Home({ currentUser }) {
     });
 
     if (response.ok) {
-      // Refresh the music list
       const musicResponse = await fetch(`/api/music/${currentUser}`);
       const music = await musicResponse.json();
       setSavedMusic(music);
@@ -54,24 +53,32 @@ function Home({ currentUser }) {
     }, 2000);
   };
 
-  const handleYoutubeSearch = async () => {
-  if (!youtubeSearch.trim()) {
-    alert('Please enter a search term');
-    return;
-  }
 
+const handleYoutubeSearch = async () => {
   try {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?q=${youtubeSearch}`);
+    const randomStart = Math.floor(Math.random() * 50) + 1;
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_start=${randomStart}&_limit=3`);
     const data = await response.json();
     
-    const musicResults = data.slice(0, 3).map(post => 
-      `${youtubeSearch} - ${post.title.slice(0, 30)}...`
-    );
+    const inspirationalResults = data.map((post, index) => {
+      const inspirations = [
+        `💡 "Create music like ${post.title.split(' ').slice(0, 3).join(' ')}..." - Producer Tip`,
+        `💡 "Let your sound be ${post.title.split(' ').slice(1, 4).join(' ')}..." - Artist Wisdom`, 
+        `💡 "Music flows when ${post.title.split(' ').slice(0, 4).join(' ')}..." - Creative Mind`
+      ];
+      return inspirations[index] || `💡 "Inspiration: ${post.title.slice(0, 40)}..." - Music Creator`;
+    });
     
-    setYoutubeResults(musicResults);
+    setYoutubeResults(inspirationalResults);
   } catch (error) {
     console.error('API call failed:', error);
-    alert('Search failed, please try again');
+    
+    const fallbackQuotes = [
+      `💡 "Music is the universal language of mankind." - Henry Wadsworth Longfellow`,
+      `💡 "Where words fail, music speaks." - Hans Christian Andersen`,
+      `💡 "Music can change the world because it can change people." - Bono`
+    ];
+    setYoutubeResults(fallbackQuotes);
   }
 };
 
@@ -186,7 +193,7 @@ useEffect(() => {
         <h3>YouTube Inspiration Search (3rd Party API)</h3>
         <input 
           type="text" 
-          placeholder="Search for music inspiration..."
+          placeholder="Click search for inspiration quotes..."
           style={{ width: '250px', padding: '8px', marginRight: '10px' }}
           onChange={(e) => setYoutubeSearch(e.target.value)}
         />
@@ -194,7 +201,7 @@ useEffect(() => {
           onClick={handleYoutubeSearch}
           style={{ padding: '8px 15px', backgroundColor: '#ff0000', color: 'white', border: 'none', borderRadius: '5px' }}
         >
-          Search YouTube
+          Get Inspiration
         </button>
         {youtubeResults.length > 0 && (
           <div style={{ marginTop: '10px' }}>
