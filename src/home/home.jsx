@@ -11,36 +11,39 @@ function Home({ currentUser }) {
   const [youtubeResults, setYoutubeResults] = useState([]);
   const [messages, setMessages] = useState([]);
   
-  const handleSaving = () => {
-      if (!currentUser) {
-        alert('Please log in to save music!');
-        return;
-      }
+    const handleSaving = async () => {
+    if (!currentUser) {
+      alert('Please log in to save music!');
+      return;
+    }
 
     setIsSaving(true);
-    setTimeout(() => {
-      setIsSaving(false);
-      const newSong = {
+    
+    const newSong = {
       id: Date.now(),
-      name: songName ? `${songName}.mp3`: `${selectedFile.name}_edited`,
+      name: songName ? `${songName}.mp3` : `${selectedFile.name}_edited`,
       speed: audioSpeed,
       dateCreated: new Date().toLocaleDateString(),
       owner: currentUser
     };
 
-    const allMusic = JSON.parse(localStorage.getItem('allUserMusic') || '{}');
+    const response = await fetch('/api/music', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: currentUser, song: newSong })
+    });
 
-    if (!allMusic[currentUser]) {
-      allMusic[currentUser] = [];
+    if (response.ok) {
+      // Refresh the music list
+      const musicResponse = await fetch(`/api/music/${currentUser}`);
+      const music = await musicResponse.json();
+      setSavedMusic(music);
+      alert('Audio saved successfully!');
+    } else {
+      alert('Failed to save music');
     }
-    allMusic[currentUser].push(newSong);
-
-    localStorage.setItem('allUserMusic', JSON.stringify(allMusic));
-
-    localStorage.setItem('savedMusic', JSON.stringify(allMusic[currentUser]));
-    setSavedMusic(allMusic[currentUser]);
-    alert('Audio saved successfully!');
-    }, 1000);
+    
+    setIsSaving(false);
   };
 
   const handleAIDenoiser = () => {
