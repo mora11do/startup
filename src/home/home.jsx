@@ -7,8 +7,8 @@ function Home({ currentUser }) {
   const [isSaving, setIsSaving] = useState(false);
   const [savedMusic, setSavedMusic] = useState([]);
   const [songName, setSongName] = useState('');
-  const [youtubeSearch, setYoutubeSearch] = useState('');
-  const [youtubeResults, setYoutubeResults] = useState([]);
+  const [QuotesSearch, setQuotesSearch] = useState('');
+  const [quotesResults, setQuotesResults] = useState([]);
   const [messages, setMessages] = useState([]);
   
     const handleSaving = async () => {
@@ -54,22 +54,21 @@ function Home({ currentUser }) {
   };
 
 
-const handleYoutubeSearch = async () => {
+const handleInspirationaQuotes = async () => {
   try {
     const randomStart = Math.floor(Math.random() * 50) + 1;
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_start=${randomStart}&_limit=3`);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_start=${randomStart}&_limit=2`);
     const data = await response.json();
     
     const inspirationalResults = data.map((post, index) => {
       const inspirations = [
-        `💡 "Create music like ${post.title.split(' ').slice(0, 3).join(' ')}..." - Producer Tip`,
-        `💡 "Let your sound be ${post.title.split(' ').slice(1, 4).join(' ')}..." - Artist Wisdom`, 
-        `💡 "Music flows when ${post.title.split(' ').slice(0, 4).join(' ')}..." - Creative Mind`
+        `"Create ${post.title.split(' ').slice(0, 3).join(' ')} music" (That's French for "really cool")`, 
+        `"Music flows when you are ${post.title.split(' ').slice(0, 4).join(' ')}" (That's Latin for "inspired")`
       ];
-      return inspirations[index] || `💡 "Inspiration: ${post.title.slice(0, 40)}..." - Music Creator`;
+      return inspirations[index];
     });
     
-    setYoutubeResults(inspirationalResults);
+    setQuotesResults(inspirationalResults);
   } catch (error) {
     console.error('API call failed:', error);
     
@@ -78,7 +77,7 @@ const handleYoutubeSearch = async () => {
       `💡 "Where words fail, music speaks." - Hans Christian Andersen`,
       `💡 "Music can change the world because it can change people." - Bono`
     ];
-    setYoutubeResults(fallbackQuotes);
+    setQuotesResults(fallbackQuotes);
   }
 };
 
@@ -190,25 +189,19 @@ useEffect(() => {
 
 
       <div style={{ border: '1px solid purple', padding: '10px', margin: '10px' }}>
-        <h3>YouTube Inspiration Search (3rd Party API)</h3>
-        <input 
-          type="text" 
-          placeholder="Click search for inspiration quotes..."
-          style={{ width: '250px', padding: '8px', marginRight: '10px' }}
-          onChange={(e) => setYoutubeSearch(e.target.value)}
-        />
+        <h3>Inspirational Quotes to Motivate You as You Create Audio (3rd Party API)</h3>
         <button 
-          onClick={handleYoutubeSearch}
+          onClick={handleInspirationaQuotes}
           style={{ padding: '8px 15px', backgroundColor: '#ff0000', color: 'white', border: 'none', borderRadius: '5px' }}
         >
           Get Inspiration
         </button>
-        {youtubeResults.length > 0 && (
+        {quotesResults.length > 0 && (
           <div style={{ marginTop: '10px' }}>
             <h4>Results:</h4>
-            {youtubeResults.map((video, index) => (
+            {quotesResults.map((video, index) => (
               <p key={index} style={{ margin: '5px 0', padding: '5px', backgroundColor: '#f0f0f0' }}>
-                🎵 {video}
+                {video}
               </p>
             ))}
           </div>
