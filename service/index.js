@@ -45,6 +45,23 @@ app.post('/api/login', (req, res) => {
   }
 });
 
+app.get('/api/music/:username', (req, res) => {
+  const { username } = req.params;
+  const music = userMusic[username] || [];
+  res.json(music);
+});
+
+app.post('/api/music', (req, res) => {
+  const { username, song } = req.body;
+  
+  if (!userMusic[username]) {
+    userMusic[username] = [];
+  }
+  
+  userMusic[username].push(song);
+  res.json({ message: 'Music saved successfully' });
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
