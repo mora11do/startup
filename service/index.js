@@ -17,3 +17,7 @@ let userMusic = {};
 app.get('/api/test', (req, res) => {
   res.json({ message: 'api test thing' });
 });
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
