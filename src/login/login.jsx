@@ -6,17 +6,29 @@ function Login({ setCurrentUser }) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    
-    if (username && password) {
-      setCurrentUser(username);
-      navigate('/');
-      alert(`Welcome, ${username}!`);
-    } else {
-      alert('Please enter username and password');
-    }
-  };
+  const handleLogin = async (e) => {
+  e.preventDefault();
+  
+  if (!username || !password) {
+    alert('Please enter username and password');
+    return;
+  }
+
+  const response = await fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  });
+
+  const data = await response.json();
+  console.log('Response data:', data);
+  
+  if (response.ok) {
+    alert('Login successful!');
+  } else {
+    alert('Login failed!');
+  }
+};
 
   const handleLogout = () => {
     setCurrentUser('');
