@@ -51,7 +51,23 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-app.post('/api/music/:username', async (req, res) => {
+app.post('/api/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    
+    const user = await DB.getUser(username);
+    
+    if (user && await bcrypt.compare(password, user.password)) {
+      res.json({ message: 'Login successful', username: username });
+    } else {
+      res.status(401).json({ message: 'Invalid username or password' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error logging in', error: error.message });
+  }
+});
+
+app.get('/api/music/:username', async (req, res) => {
   try {
   const { username } = req.params;
   const music = await DB.getSong(username);
@@ -61,15 +77,24 @@ app.post('/api/music/:username', async (req, res) => {
   }
 });
 
-app.post('/api/music', (req, res) => {
-  const { username, song } = req.body;
+app.post('/api/music', async (req, res) => {
+  try {
+  const { username, song, public } = req.body;
   
-  if (!userMusic[username]) {
-    userMusic[username] = [];
-  }
-  
-  userMusic[username].push(song);
-  res.json({ message: 'Music saved successfully' });
+  const musicObj = {
+      username: username,
+      song: song,
+      public: public || false,
+      created: new Date()
+    };
+
+   await DB.addSong(musicObj);
+
+     res.json({ message: 'Music saved successfully' });
+
+    } catch (error) {
+ res.status(500).json({ message: 'Error saving music', error: error.message });
+    }
 });
 
 app.listen(port, () => {
