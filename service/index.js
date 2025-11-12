@@ -1,6 +1,9 @@
 const cookieParser = require('cookie-parser');
 const express = require('express');
 
+const bcrypt = require('bcryptjs');
+const DB = require('./database.js');
+
 const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -11,44 +14,51 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 
-let users = {};
-let userMusic = {};
+// let users = {};
+// let userMusic = {};
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'api test thing' });
 });
 
 
-app.get('/api/users', (req, res) => {
-  res.json(users);
-});
+// app.get('/api/users', (req, res) => {
+//   res.json(users);
+// });
 
-app.post('/api/register', (req, res) => {
+app.post('/api/register', async (req, res) => {
+   try {
   const { username, password } = req.body;
-  
-  if (users[username]) {
-    res.status(400).json({ message: 'Username already exists' });
-    return;
+
+  const existingUser = await DB.getUser(username);
+    if (existingUser) {
+      res.status(400).json({ message: 'Username already exists' });
+      return;
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+      username: username,
+      password: passwordHash,
+      created: new Date()
+    };
+    await DB.addUser(user);
+    
+    res.json({ message: 'User created successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating user', error: error.message });
   }
-  
-  users[username] = { password: password };
-  res.json({ message: 'User created successfully' });
 });
 
-app.post('/api/login', (req, res) => {
-  const { username, password } = req.body;
-  
-  if (users[username] && users[username].password === password) {
-    res.json({ message: 'Login successful', username: username });
-  } else {
-    res.status(401).json({ message: 'Invalid username or password' });
-  }
-});
-
-app.get('/api/music/:username', (req, res) => {
+app.post('/api/music/:username', async (req, res) => {
+  try {
   const { username } = req.params;
-  const music = userMusic[username] || [];
-  res.json(music);
+  const music = await DB.getSong(username);
+   res.json(music);
+  } catch (error) {
+ res.status(500).json({ message: 'Error fetching music', error: error.message });
+  }
 });
 
 app.post('/api/music', (req, res) => {
