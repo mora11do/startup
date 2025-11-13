@@ -15,7 +15,7 @@ fi
 
 printf "\n----> Deploying React bundle $service to $hostname with $key\n"
 
-# Step 1
+#  Step 1
 printf "\n----> Build the distribution package\n"
 rm -rf build
 mkdir build
