@@ -214,16 +214,16 @@ useEffect(() => {
         width="800"
         height="500"
       />
-      <h1>My Music (Database Placeholder)</h1>
+      <h1>My Music (Database)</h1>
         <div style={{ border: '1px solid teal', padding: '10px', margin: '10px' }}>
           {savedMusic.length > 0 ? (
             savedMusic.map(song => (
               <div key={song.id} style={{ margin: '10px 0', padding: '10px', backgroundColor: '#f9f9f9', borderRadius: '5px' }}>
-                <strong>🎵 {song.name}</strong> - Speed: {song.speed}x - Saved: {song.dateCreated}
+                <strong>🎵 {song.song?.name || 'Untitled'}</strong> - Speed: {song.song?.speed || 'N/A'}x - Saved: {song.song?.dateCreated || new Date(song.created).toLocaleDateString()}
               </div>
             ))
           ) : (
-            <p>No saved music yet. Upload and save some audio files!</p>
+            <p>{currentUser ? 'No saved music yet. Upload and save some audio files!' : 'Log in to see saved music!'}</p>
           )}
         </div>
       <img
