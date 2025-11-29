@@ -12,6 +12,7 @@ function Home({ currentUser }) {
   const [messages, setMessages] = useState([]);
   const wsRef = useRef(null);
   const [chatInput, setChatInput] = useState('');
+  const [wsOpen, setWsOpen] = useState(false);
   
     const handleSaving = async () => {
     if (!currentUser) {
@@ -84,6 +85,7 @@ const handleInspirationaQuotes = async () => {
 };
 
 const sendPing = () => {
+  console.log('Ping clicked. ws readyState:', wsRef.current?.readyState);
   if (wsRef.current?.readyState === 1) {
     wsRef.current.send(JSON.stringify({ from: currentUser || 'Guest', message: 'Ping' }));
   }
@@ -137,7 +139,9 @@ useEffect(() => {
     }
   };
 
-  ws.onclose = () => { wsRef.current = null; };
+ws.onopen = () => { console.log('WS connected', ws.readyState); setWsOpen(true); };
+ws.onerror = (e) => { console.error('WS error', e); setWsOpen(false); };
+ws.onclose = () => { wsRef.current = null; setWsOpen(false); };
   return () => ws.close();
 }, []);
 
@@ -272,7 +276,7 @@ useEffect(() => {
             ) : (
               <p>Waiting for live messages...</p>
             )}
-            <button onClick={sendPing} style={{ marginTop: '8px' }}>Ping</button>
+            <button onClick={sendPing} disabled={!wsOpen} style={{ marginTop: '8px' }}>Ping</button>
           </div>
         </div>
     </div>
