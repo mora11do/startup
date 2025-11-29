@@ -82,18 +82,25 @@ const handleInspirationaQuotes = async () => {
     setQuotesResults(fallbackQuotes);
   }
 };
-
 const sendPing = () => {
+  if (!currentUser) {
+    alert('Please log in to chat.');
+    return;
+  }
   if (wsRef.current?.readyState === 1) {
-    wsRef.current.send(JSON.stringify({ from: currentUser || 'Guest', message: 'Ping' }));
+    wsRef.current.send(JSON.stringify({ from: currentUser, message: 'Ping' }));
   }
 };
 
 const sendChat = () => {
   const text = chatInput.trim();
   if (!text) return;
+  if (!currentUser) {
+    alert('Please log in to chat.');
+    return;
+  }
   if (wsRef.current?.readyState === 1) {
-    wsRef.current.send(JSON.stringify({ from: currentUser || 'Guest', message: text }));
+    wsRef.current.send(JSON.stringify({ from: currentUser, message: text }));
     setChatInput('');
   }
 };
