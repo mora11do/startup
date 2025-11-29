@@ -256,21 +256,21 @@ useEffect(() => {
             ) : (
               <p>Waiting for live messages...</p>
             )}
-            <div style={{ marginTop: '10px', display: 'flex', gap: '8px' }}>
-              <input
-                type="text"
-                placeholder="Type a message..."
-                value={chatInput}
-                onChange={(e) => setChatInput(e.target.value)}
-                style={{ flex: 1, padding: '8px' }}
-              />
-              <button onClick={sendChat} disabled={!wsRef.current || wsRef.current.readyState !== 1}>
-                Send
-              </button>
-            </div>
+          </div>
+          <div style={{ marginTop: '10px', display: 'flex', gap: '8px' }}>
+            <input
+              type="text"
+              placeholder="Type a message..."
+              value={chatInput}
+              onChange={(e) => setChatInput(e.target.value)}
+              style={{ flex: 1, padding: '8px' }}
+            />
+            <button onClick={sendChat} disabled={!wsRef.current || wsRef.current.readyState !== 1}>
+              Send
+            </button>
           </div>
         </div>
-    </div>
+        </div>
   );
 }
 
