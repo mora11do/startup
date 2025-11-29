@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 function Home({ currentUser }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [audioSpeed, setAudioSpeed] = useState(1);
-  const [isDenoising, setIsDenoising] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [savedMusic, setSavedMusic] = useState([]);
   const [songName, setSongName] = useState('');
@@ -46,15 +45,6 @@ function Home({ currentUser }) {
     
     setIsSaving(false);
   };
-
-  const handleAIDenoiser = () => {
-    setIsDenoising(true);
-    setTimeout(() => {
-      setIsDenoising(false);
-      alert('AI denoising complete!');
-    }, 2000);
-  };
-
 
 const handleInspirationaQuotes = async () => {
   try {
@@ -179,26 +169,6 @@ useEffect(() => {
         </div>
       )}
 
-      {selectedFile && (
-        <div style={{ border: '1px solid orange', padding: '10px', margin: '10px' }}>
-          <h3>AI Denoiser (3rd Party Service)</h3>
-          <button 
-            onClick={handleAIDenoiser} 
-            disabled={isDenoising}
-            style={{ 
-              padding: '10px 20px', 
-              backgroundColor: isDenoising ? '#ccc' : '#ff6600', 
-              color: 'white', 
-              border: 'none', 
-              borderRadius: '5px' 
-            }}
-          >
-            {isDenoising ? 'Processing...' : 'Apply AI Denoising'}
-          </button>
-        </div>
-      )}
-
-
       <div style={{ border: '1px solid purple', padding: '10px', margin: '10px' }}>
         <h3>Inspirational Quotes to Motivate You as You Create Audio (3rd Party API)</h3>
         <button 
@@ -218,14 +188,7 @@ useEffect(() => {
           </div>
         )}
       </div>
-
-      <img
-        src="https://images.ctfassets.net/lzny33ho1g45/5G8NtHY6do1a5iudg099Pf/be2c39648884ab91e10fb7b4360a9c8c/image6.jpeg"
-        alt="Audio Editor"
-        width="800"
-        height="500"
-      />
-      <h1>My Music (Database)</h1>
+      <h1>My Music</h1>
         <div style={{ border: '1px solid teal', padding: '10px', margin: '10px' }}>
           {savedMusic.length > 0 ? (
             savedMusic.map(song => (
@@ -237,13 +200,7 @@ useEffect(() => {
             <p>{currentUser ? 'No saved music yet. Upload and save some audio files!' : 'Log in to see saved music!'}</p>
           )}
         </div>
-      <img
-        src="https://media.idownloadblog.com/wp-content/uploads/2023/03/Messages-app-icon.jpg"
-        alt="Message"
-        width="400"
-        height="200"
-      />
-      <h1>Live Music Chat (WebSocket Placeholder)</h1>
+      <h1>Live Music Chat</h1>
         <div style={{ border: '1px solid red', padding: '10px', margin: '10px' }}>
           <h3>Live Messages from Other Users</h3>
           <div style={{ height: '150px', overflowY: 'scroll', backgroundColor: '#f9f9f9', padding: '10px', borderRadius: '5px' }}>

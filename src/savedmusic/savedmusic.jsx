@@ -15,7 +15,7 @@ function SavedMusic({ currentUser }) {
 
   return (
     <div>
-      <h1>My Music (Database)</h1>
+      <h1>My Music</h1>
       <div style={{ border: '1px solid teal', padding: '10px', margin: '10px' }}>
         {savedMusic.length > 0 ? (
           savedMusic.map(song => (

@@ -32,7 +32,7 @@ function App() {
             <menu>
               <Link to="/">Home</Link>
               <Link to="/login">Log in</Link>
-              <Link to="/savedmusic">Browse Music</Link>
+              <Link to="/savedmusic">Saved Music</Link>
             </menu>
           </nav>
           <h2>Welcome, {currentUser || 'Guest'}!</h2>
