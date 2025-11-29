@@ -1,3 +1,6 @@
+const http = require('http');
+const { WebSocketServer } = require('ws');
+
 const cookieParser = require('cookie-parser');
 const express = require('express');
 
@@ -14,17 +17,25 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 
-// let users = {};
-// let userMusic = {};
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server, path: '/ws' });
+
+wss.on('connection', (ws) => {
+  ws.on('message', (data) => {
+    for (const client of wss.clients) {
+      if (client.readyState === 1) {
+        client.send(data.toString());
+      }
+    }
+  });
+});
+
+console.log('webSocket server ready');
+
 
 app.get('/api/test', (req, res) => {
   res.json({ message: 'api test thing' });
 });
-
-
-// app.get('/api/users', (req, res) => {
-//   res.json(users);
-// });
 
 app.post('/api/register', async (req, res) => {
    try {
@@ -97,6 +108,6 @@ app.post('/api/music', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
