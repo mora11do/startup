@@ -82,15 +82,6 @@ const handleInspirationaQuotes = async () => {
     setQuotesResults(fallbackQuotes);
   }
 };
-const sendPing = () => {
-  if (!currentUser) {
-    alert('Please log in to chat.');
-    return;
-  }
-  if (wsRef.current?.readyState === 1) {
-    wsRef.current.send(JSON.stringify({ from: currentUser, message: 'Ping' }));
-  }
-};
 
 const sendChat = () => {
   const text = chatInput.trim();
@@ -265,7 +256,6 @@ useEffect(() => {
             ) : (
               <p>Waiting for live messages...</p>
             )}
-            <button onClick={sendPing} style={{ marginTop: '8px' }}>Ping</button>
             <div style={{ marginTop: '10px', display: 'flex', gap: '8px' }}>
               <input
                 type="text"
