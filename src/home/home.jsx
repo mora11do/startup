@@ -106,29 +106,6 @@ const sendChat = () => {
 };
 
 useEffect(() => {
-  const interval = setInterval(() => {
-    const userNames = ['Bob', 'Bobby', 'Bobi', 'Sam'];
-    const messageSamples = [
-      'Check out my latest track!',
-      'Just finished mixing this song',
-      'Need feedback on this beat',
-      "Truly the most website ever invented",
-      "Wow this app is the most app I've ever seen in my life"
-    ];
-    
-    const randomUser = userNames[Math.floor(Math.random() * userNames.length)];
-    const randomMessage = messageSamples[Math.floor(Math.random() * messageSamples.length)];
-    
-    setMessages(prev => [...prev.slice(-4), {
-      from: randomUser,
-      message: randomMessage,
-    }]);
-  }, 5000);
-
-  return () => clearInterval(interval);
-}, []);
-
-useEffect(() => {
   if (currentUser) {
     fetch(`/api/music/${currentUser}`)
       .then(response => response.json())
