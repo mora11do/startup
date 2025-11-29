@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function Home({ currentUser }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -10,6 +10,8 @@ function Home({ currentUser }) {
   const [QuotesSearch, setQuotesSearch] = useState('');
   const [quotesResults, setQuotesResults] = useState([]);
   const [messages, setMessages] = useState([]);
+  const wsRef = useRef(null);
+  const [chatInput, setChatInput] = useState('');
   
     const handleSaving = async () => {
     if (!currentUser) {
@@ -81,6 +83,12 @@ const handleInspirationaQuotes = async () => {
   }
 };
 
+const sendPing = () => {
+  if (wsRef.current?.readyState === 1) {
+    wsRef.current.send(JSON.stringify({ from: currentUser || 'Guest', message: 'Ping' }));
+  }
+};
+
 useEffect(() => {
   const interval = setInterval(() => {
     const userNames = ['Bob', 'Bobby', 'Bobi', 'Sam'];
@@ -113,6 +121,25 @@ useEffect(() => {
     setSavedMusic([]);
   }
 }, [currentUser]);
+
+useEffect(() => {
+  const wsUrl = `${window.location.origin.replace(/^http/, 'ws')}/ws`;
+  const ws = new WebSocket(wsUrl);
+  wsRef.current = ws;
+
+  ws.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      const msg = typeof data === 'string' ? { from: 'Anon', message: data } : data;
+      setMessages(prev => [...prev.slice(-49), msg]);
+    } catch {
+      setMessages(prev => [...prev.slice(-49), { from: 'Anon', message: event.data }]);
+    }
+  };
+
+  ws.onclose = () => { wsRef.current = null; };
+  return () => ws.close();
+}, []);
 
   return (
     <div>
@@ -245,6 +272,7 @@ useEffect(() => {
             ) : (
               <p>Waiting for live messages...</p>
             )}
+            <button onClick={sendPing} style={{ marginTop: '8px' }}>Ping</button>
           </div>
         </div>
     </div>
